@@ -1,0 +1,8 @@
+sudo dmesg --clear
+sudo chrt -r 1 ./spins 1 & 
+sudo chrt -r 1 ./spins 4 & 
+sudo chrt -r 1 ./spins 8 & 
+sudo chrt -r 1 ./spins 12 & 
+sudo chrt -r 1 ./spins 16 & 
+sudo chrt -r 1 ./spins 20 & 
+

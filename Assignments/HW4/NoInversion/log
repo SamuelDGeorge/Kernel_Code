@@ -1,0 +1,102 @@
+No Inversion
+
+Run 1:
+GPU Locks Initialized
+PID 7835 completed 539, duration 30 seconds
+GPU Locks Initialized
+PID 7836 completed 927, duration 30 seconds
+GPU Locks Initialized
+PID 7833 completed 93, duration 30 seconds
+GPU Locks Initialized
+PID 7834 completed 277, duration 30 seconds
+
+Run 2:
+GPU Locks Initialized
+PID 7842 completed 545, duration 30 seconds
+GPU Locks Initialized
+PID 7843 completed 942, duration 30 seconds
+GPU Locks Initialized
+PID 7841 completed 238, duration 30 seconds
+GPU Locks Initialized
+PID 7840 completed 80, duration 30 seconds
+
+Run 3:
+GPU Locks Initialized
+PID 7850 completed 938, duration 30 seconds
+GPU Locks Initialized
+PID 7848 completed 236, duration 30 seconds
+GPU Locks Initialized
+PID 7847 completed 79, duration 30 seconds
+GPU Locks Initialized
+PID 7849 completed 546, duration 30 seconds
+
+run 4:
+GPU Locks Initialized
+PID 7858 completed 936, duration 30 seconds
+GPU Locks Initialized
+PID 7857 completed 542, duration 30 seconds
+GPU Locks Initialized
+PID 7856 completed 234, duration 30 seconds
+GPU Locks Initialized
+PID 7855 completed 79, duration 30 seconds
+
+runt 5:
+GPU Locks Initialized
+PID 7865 completed 919, duration 30 seconds
+GPU Locks Initialized
+PID 7864 completed 537, duration 30 seconds
+GPU Locks Initialized
+PID 7863 completed 233, duration 30 seconds
+GPU Locks Initialized
+PID 7862 completed 129, duration 30 seconds
+
+run 6:
+GPU Locks Initialized
+PID 7872 completed 943, duration 30 seconds
+GPU Locks Initialized
+PID 7871 completed 546, duration 30 seconds
+GPU Locks Initialized
+PID 7870 completed 236, duration 30 seconds
+GPU Locks Initialized
+PID 7869 completed 79, duration 30 seconds
+
+run 7:
+GPU Locks Initialized
+PID 7876 completed 80, duration 30 seconds
+GPU Locks Initialized
+PID 7879 completed 945, duration 30 seconds
+GPU Locks Initialized
+PID 7878 completed 554, duration 30 seconds
+GPU Locks Initialized
+PID 7877 completed 238, duration 30 seconds
+
+run 8:
+GPU Locks Initialized
+PID 7898 completed 939, duration 30 seconds
+GPU Locks Initialized
+PID 7897 completed 544, duration 30 seconds
+GPU Locks Initialized
+PID 7896 completed 236, duration 30 seconds
+GPU Locks Initialized
+PID 7895 completed 79, duration 30 seconds
+
+run 9:
+GPU Locks Initialized
+PID 7904 completed 535, duration 30 seconds
+GPU Locks Initialized
+PID 7903 completed 232, duration 30 seconds
+GPU Locks Initialized
+PID 7905 completed 924, duration 30 seconds
+GPU Locks Initialized
+PID 7902 completed 130, duration 30 seconds
+
+run 10:
+GPU Locks Initialized
+PID 7912 completed 940, duration 30 seconds
+GPU Locks Initialized
+PID 7911 completed 543, duration 30 seconds
+GPU Locks Initialized
+PID 7909 completed 79, duration 30 seconds
+GPU Locks Initialized
+PID 7910 completed 238, duration 30 seconds
+

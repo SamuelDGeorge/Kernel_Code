@@ -1,0 +1,27 @@
+const struct sched_class *rt_class_p;
+static struct sched_class uwrr_sched_class;
+
+static void task_tick_uwrr (void *rq, struct task_struct *p, int queued)
+{
+
+  ............
+
+   rt_class_p->task_tick(rq, p, queued);
+
+  ............	   
+
+}
+
+{
+ ..............
+
+    rt_class_p = current->sched_class;
+    memcpy(&uwrr_sched_class, rt_class_p, sizeof(uwrr_sched_class));
+    uwrr_sched_class.task_tick = task_tick_uwrr;
+
+
+    current->sched_class = &uwrr_sched_class;
+
+ ...............
+}
+

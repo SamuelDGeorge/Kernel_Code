@@ -1,0 +1,2 @@
+sudo cp /sys/kernel/debug/tracing/trace ./full_log
+sudo cat full_log | grep "{log_fault}" | cut -f2,3,4,5,6,7,8 > parsed_log

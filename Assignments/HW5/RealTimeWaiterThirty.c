@@ -1,0 +1,149 @@
+/*Samuel George, sdgeorge
+I have Neither given nor recieved unauthorized aid on this assignment.
+*/
+/*
+ * A simple user space program to illustrate calling an
+ * emulated "system call" in programming assignments in
+ * COMP 530H.  It opens the debugfs file used for calling
+ * the getpid kernel module, requests the pid of the calling
+ * process, and outputs the result.  It also outputs the 
+ * result from the regular Linux getpid() system call so the
+ * two results can be compared.
+ */
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <math.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <time.h>
+#include <crypt.h>
+
+#define MAX_TIME  30  //run time in seconds
+#define MAX_CALL 100
+#define MAX_RESP 100
+#define MAX_PROCESSES 25
+
+#include "uswr.h" /* used by both kernel module and user program */
+
+void do_syscall(char *call_string);  // does the call emulation
+void do_waitcall(char *call_string, char * weight);  // does the call emulation
+
+// variables shared between main() and the do_syscall() function
+int fp;
+int wp;
+char the_file[256] = "/sys/kernel/debug/";
+char the_wait[256] = "/sys/kernel/debug/";
+char dir_wait_name[] = "kernelsync";
+char call_buf[MAX_CALL];  /* no call string can be longer */
+char call_buf_two[MAX_CALL];
+char resp_buf[MAX_RESP];  /* no response strig can be longer */
+
+void spin (char * weight) {	
+  unsigned long count = 0;
+  pid_t my_pid;
+  time_t start, elapsed;
+  char * encrypt;
+  FILE * write;
+
+  my_pid = getpid();
+  start = time(NULL);
+  elapsed = 0;
+  while (elapsed < MAX_TIME) {
+   	encrypt = crypt("This is my lazy password", "A1");
+   	count++;
+  	elapsed = time(NULL) - start;
+  	}
+  write = fopen("log", "a");
+  fprintf(write, "PID: %d Weight: %s Elapsed time: %ld iterations: %ld\n", my_pid, weight,elapsed, count);
+  fclose(write);
+}
+
+void main (int argc, char* argv[])
+{
+  char inputstring[MAX_CALL]; 
+  char waitstring[MAX_CALL];
+
+  /* Build the complete file path name and open the file */
+
+  strcat(the_file, dir_name);
+  strcat(the_file, "/");
+  strcat(the_file, file_name);
+
+  strcat(the_wait, dir_wait_name);
+  strcat(the_wait, "/");
+  strcat(the_wait, file_name);
+
+  if ((fp = open (the_file, O_RDWR)) == -1) {
+      fprintf (stderr, "error opening %s\n", the_file);
+      exit (-1);
+  }
+
+  if ((wp = open (the_wait, O_RDWR)) == -1) {
+      fprintf (stderr, "error opening %s\n", the_wait);
+      exit (-1);
+  }				
+ 
+  if (argv[1] == NULL) {
+	fprintf(stderr, "Need a number to do syscall");
+	exit(1);
+  }
+
+  sprintf(inputstring,"uwrr %s",argv[1]); 
+  do_syscall(inputstring);
+  //Changed your scheduling. Now Wait to Be Released
+  
+  sprintf(waitstring, "event_wait 1 0");
+  do_waitcall(waitstring,argv[1]);
+					
+  close (fp);
+  close (wp);
+} /* end main() */
+
+/* 
+ * A function to actually emulate making a system call by
+ * writing the request to the debugfs file and then reading
+ * the response.  It encapsulates the semantics of a regular
+ * system call in that the calling process is blocked until
+ * both the request (write) and response (read) have been
+ * completed by the kernel module.
+ *  
+ * The input string should be properly formatted for the
+ * call string expected by the kernel module using the
+ * specified debugfs path (this function does no error
+ * checking of input).
+ */ 
+
+void do_waitcall(char *call_string, char * weight)
+{
+  int rc;
+  strcpy(call_buf_two, call_string);
+  rc = write(wp, call_buf_two, strlen(call_buf_two) + 1);
+  spin(weight);
+}
+
+void do_syscall(char *call_string)
+{
+  int rc;
+
+  strcpy(call_buf, call_string);
+
+  rc = write(fp, call_buf, strlen(call_buf) + 1);
+  if (rc == -1) {
+     fprintf (stderr, "error changing Scheduling %s\n", the_file);
+     fflush(stderr);
+     exit(1);
+  }
+
+  rc = read(wp, resp_buf, sizeof(resp_buf));
+  if (rc == -1) {
+     fprintf (stderr, "error reading %s\n", the_file);
+     fflush(stderr);
+     exit (-1);
+  }
+}
+

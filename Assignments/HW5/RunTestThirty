@@ -1,0 +1,8 @@
+sudo dmesg --clear
+sudo chrt -r 1 ./thirty 1 & 
+sudo chrt -r 1 ./thirty 4 & 
+sudo chrt -r 1 ./thirty 8 & 
+sudo chrt -r 1 ./thirty 12 & 
+sudo chrt -r 1 ./thirty 16 & 
+sudo chrt -r 1 ./thirty 20 & 
+
